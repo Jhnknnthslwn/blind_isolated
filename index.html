@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- External Icon -->
+    <script
+      src="https://kit.fontawesome.com/4111233f42.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- CSS Styling -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Blind & Isolated</title>
+  </head>
+  <body>
+    <!-- Startscreen Parent Class -->
+    <div id="start-container">
+      <!-- Main Menu -->
+      <div id="startscreen">
+        <div id="game-title">
+          <h1>Blind & Isolated</h1>
+        </div>
+        <div id="game-logo">
+          <svg viewbox="1 1 8 8">
+            <pattern
+              id="image"
+              width="10"
+              height="10"
+              patternUnits="userSpaceOnUse"
+            >
+              <image
+                xlink:href="../../img-res/menu-logo.png"
+                x="0"
+                y="0"
+                height="10"
+                width="10"
+              />
+            </pattern>
+            <path
+              d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z"
+              fill="url(#image)"
+            />
+          </svg>
+        </div>
+        <!-- Press Enter 2 Play -->
+        <div id="ptwop">
+          <h4>Press Enter to Play</h4>
+        </div>
+        <div id="game-buttons">
+          <!-- Play Button -->
+          <button onclick="startup()" id="play">Play Now ▶</button>
+          <!-- Game Credits -->
+          <button id="credits">
+            <i class="fa-solid fa-user-astronaut fa-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Game UI -->
+    <div id="gamescreen" style="display: none">
+      <!-- Game Parent Class -->
+      <div id="game">
+        <!-- Child Class: Maze-map -->
+        <div id="maze"></div>
+        <!-- Child Class: Game Dialogue -->
+        <div id="infoscreen">
+          <h1>Info Log</h1>
+          <!-- Child Class: Movement-log -->
+          <div id="coordinates"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Javascript Code, where the magic begin -->
+    <script src="Game.js"></script>
+  </body>
+</html>

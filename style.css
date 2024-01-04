@@ -1,0 +1,251 @@
+/* Game External Assets */
+@import url("https://fonts.googleapis.com/css2?family=Besley&family=Dosis:wght@200&family=Silkscreen&display=swap");
+/* Main Menu UI */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Silkscreen", sans-serif;
+}
+#start-container {
+  background-color: aquamarine;
+  height: 100dvh;
+}
+#startscreen {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
+  grid-gap: 2px;
+}
+#startscreen > div {
+  font-size: 2vw;
+  padding: 0.35em;
+  color: #ffffff;
+  background: #082414;
+  text-align: center;
+}
+/* Game Logo */
+svg {
+  display: block;
+  width: 30%;
+  margin: auto;
+  height: auto;
+  filter: brightness(4) drop-shadow(0 0 0.75rem green);
+}
+/* Play Buttons */
+#game-buttons button {
+  font-size: 1vw;
+}
+stretch,
+#game-buttons #play:after,
+#game-buttons #play:before {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#game-buttons #play {
+  background: #439976;
+  background-size: 100%;
+  background-image: linear-gradient(to right, #1cde90, #082414);
+  border-radius: 1.5em;
+  transition: opacity 300ms;
+  border: none;
+  color: #f7f2eb;
+  font-weight: bold;
+  height: 3em;
+  letter-spacing: 0.05em;
+  outline: none;
+  overflow: hidden;
+  width: 12em;
+  text-align: center;
+}
+#game-buttons #play:before {
+  content: "";
+  opacity: 0;
+}
+#game-buttons #play:after {
+  -moz-box-shadow: rgba(212, 207, 201, 0.75) 0 0 15px 2px;
+  -webkit-box-shadow: rgba(212, 207, 201, 0.75) 0 0 15px 2px;
+  box-shadow: rgba(212, 207, 201, 0.75) 0 0 15px 2px;
+  background: #d4cfc9;
+  content: "";
+  height: 2px;
+  opacity: 0;
+}
+#game-buttons #play:hover {
+  animation: glitch 750ms infinite;
+  cursor: pointer;
+}
+#game-buttons #play:hover:before {
+  opacity: 1;
+}
+#game-buttons #play:hover:after {
+  animation: scan 2s infinite;
+  opacity: 1;
+}
+@keyframes glitch {
+  0% {
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+  }
+  5% {
+    -moz-transform: skewX(2deg);
+    -ms-transform: skewX(2deg);
+    -webkit-transform: skewX(2deg);
+    transform: skewX(2deg);
+    opacity: 0.75;
+  }
+  10% {
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+    opacity: 1;
+  }
+  15% {
+    -moz-transform: skewX(-5deg);
+    -ms-transform: skewX(-5deg);
+    -webkit-transform: skewX(-5deg);
+    transform: skewX(-5deg);
+    opacity: 0.75;
+  }
+  20% {
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+    opacity: 1;
+  }
+  45% {
+    -moz-transform: skewX(3deg);
+    -ms-transform: skewX(3deg);
+    -webkit-transform: skewX(3deg);
+    transform: skewX(3deg);
+    opacity: 0.75;
+  }
+  50% {
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+    opacity: 1;
+  }
+  55% {
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+    opacity: 0.75;
+  }
+  60% {
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+    opacity: 1;
+  }
+  75% {
+    -moz-transform: skewX(2deg);
+    -ms-transform: skewX(2deg);
+    -webkit-transform: skewX(2deg);
+    transform: skewX(2deg);
+  }
+  80% {
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+  }
+  85% {
+    -moz-transform: skewX(-8deg);
+    -ms-transform: skewX(-8deg);
+    -webkit-transform: skewX(-8deg);
+    transform: skewX(-8deg);
+    opacity: 0.75;
+  }
+  90% {
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+  }
+}
+@keyframes scan {
+  0% {
+    top: 0%;
+  }
+  50% {
+    top: 97%;
+  }
+  100% {
+    top: 0%;
+  }
+}
+/* Credits Button */
+stretch,
+#game-buttons #credits:after,
+#game-buttons #credis:before {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#game-buttons #credits {
+  background: #439976;
+  background-size: 100%;
+  background-image: linear-gradient(to right, #1cde90, #082414);
+  border-radius: 1.5em;
+  transition: opacity 300ms;
+  border: none;
+  color: #f7f2eb;
+  font-weight: bold;
+  height: 3em;
+  letter-spacing: 0.05em;
+  outline: none;
+  overflow: hidden;
+  width: 5em;
+  text-align: center;
+}
+.material-icons {
+  size: 18px;
+}
+#game-buttons #credits:before {
+  content: "";
+  opacity: 0;
+}
+#game-buttons #credits:after {
+  -moz-box-shadow: rgba(212, 207, 201, 0.75) 0 0 15px 2px;
+  -webkit-box-shadow: rgba(212, 207, 201, 0.75) 0 0 15px 2px;
+  box-shadow: rgba(212, 207, 201, 0.75) 0 0 15px 2px;
+  background: #d4cfc9;
+  content: "";
+  height: 2px;
+  opacity: 0;
+}
+#game-buttons #credits:hover {
+  animation: glitch 750ms infinite;
+  cursor: pointer;
+}
+#game-buttons #play:hover:before {
+  opacity: 1;
+}
+#game-buttons #credits:hover:after {
+  animation: scan 2s infinite;
+  opacity: 1;
+}
+/* P2P */
+#startscreen #ptwop {
+  padding: 0.4em;
+}
+/* The Game UI */
