@@ -8,6 +8,8 @@
       src="https://kit.fontawesome.com/4111233f42.js"
       crossorigin="anonymous"
     ></script>
+    <!-- FavIcon -->
+    <link rel="icon" type="image/" href="img-res/icon.png" />
     <!-- CSS Styling -->
     <link rel="stylesheet" href="style.css" />
     <title>Blind & Isolated</title>
@@ -17,10 +19,10 @@
     <div id="start-container">
       <!-- Main Menu -->
       <div id="startscreen">
-        <div id="game-title">
+        <div id="game-title" class="grid-item">
           <h1>Blind & Isolated</h1>
         </div>
-        <div id="game-logo">
+        <div id="game-logo" class="grid-item">
           <svg viewbox="1 1 8 8">
             <pattern
               id="image"
@@ -29,7 +31,7 @@
               patternUnits="userSpaceOnUse"
             >
               <image
-                xlink:href="../../img-res/menu-logo.png"
+                xlink:href="img-res/menu-logo.png"
                 x="0"
                 y="0"
                 height="10"
@@ -43,29 +45,32 @@
           </svg>
         </div>
         <!-- Press Enter 2 Play -->
-        <div id="ptwop">
+        <div id="ptwop" class="grid-item">
           <h4>Press Enter to Play</h4>
         </div>
-        <div id="game-buttons">
+        <div id="game-buttons" class="grid-item">
           <!-- Play Button -->
           <button onclick="startup()" id="play">Play Now ▶</button>
           <!-- Game Credits -->
-          <button id="credits">
+          <button onclick="window.location.href='credits.html'" id="credits">
             <i class="fa-solid fa-user-astronaut fa-xl"></i>
           </button>
         </div>
       </div>
     </div>
-    <!-- Game UI -->
+    <!-- The Game Itself UI -->
     <div id="gamescreen" style="display: none">
       <!-- Game Parent Class -->
       <div id="game">
+        <div id="stagelvl"></div>
         <!-- Child Class: Maze-map -->
-        <div id="maze"></div>
+        <div id="stagelvl"></div>
+        <div id="maze">
+          <!-- <h1>Maze Map</h1> -->
+        </div>
         <!-- Child Class: Game Dialogue -->
         <div id="infoscreen">
           <h1>Info Log</h1>
-          <!-- Child Class: Movement-log -->
           <div id="coordinates"></div>
         </div>
       </div>

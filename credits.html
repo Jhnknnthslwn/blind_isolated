@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- External Icon -->
+    <script
+      src="https://kit.fontawesome.com/4111233f42.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- FavIcon -->
+    <link rel="icon" type="image/png" href="img-res/icon.png" />
+    <title>Blind & Isolated | Credits</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Besley&family=Dosis:wght@200&family=Silkscreen&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Silkscreen", sans-serif;
+        color: white;
+      }
+      .wrapper {
+        /* BG */
+        /* border: 5px solid wheat; */
+        background-image: url(img-res/Terminal.gif);
+        height: 100dvh;
+      }
+      .box-container {
+        /* border: 5px solid red; */
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        background-color: hsl(146, 64%, 9%);
+        opacity: 80%;
+        height: 100%;
+      }
+      .box-content {
+        border: 10px solid rgb(18, 186, 108);
+        border-radius: 30px 90px 30px 90px;
+        flex: 0 0 80%;
+        padding: 30px;
+      }
+      .back-arrow {
+        /* border: 5px dotted gold; */
+        cursor: pointer;
+        padding: 10px;
+      }
+      .heading {
+        /* border: 5px dotted royalblue; */
+        text-align: center;
+      }
+      .authors {
+        /* border: 5px dotted whitesmoke; */
+        text-align: center;
+        padding-top: 25px;
+        line-height: 2.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box-container">
+        <div class="box-content">
+          <div class="back-arrow">
+            <i
+              class="fa-solid fa-backward fa-2xl"
+              onclick="window.location.href='index.html'"
+            ></i>
+          </div>
+          <div class="heading">
+            <h1>Credits</h1>
+          </div>
+          <div class="authors">
+            <h3>John Marc Cuevas</h3>
+            <p>Lead Programmer</p>
+            <h3>John Kenneth Silawan</h3>
+            <p>Game UI Designer</p>
+            <h3>Marc Ashley Aldover</h3>
+            <p>Sound Design</p>
+            <h3>Benedict Zion Rivera</h3>
+            <p>Visual Design</p>
+            <h3>James Joshua Aquino</h3>
+            <p>Voice Over</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
