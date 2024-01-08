@@ -50,11 +50,9 @@ svg {
 stretch,
 #game-buttons #play:after,
 #game-buttons #play:before {
-  bottom: 0;
   left: 0;
   position: absolute;
   right: 0;
-  top: 0;
 }
 #game-buttons #play {
   background: #439976;
@@ -207,11 +205,9 @@ stretch,
 stretch,
 #game-buttons #credits:after,
 #game-buttons #credis:before {
-  bottom: 0;
   left: 0;
   position: absolute;
   right: 0;
-  top: 0;
 }
 #game-buttons #credits {
   background: #439976;
