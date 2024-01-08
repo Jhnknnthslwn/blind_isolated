@@ -310,12 +310,15 @@ function checkObjectiveLine(y, x) {
   ) {
     switch (levelevent) {
       case 0:
+        // play objective rached audio
         objective = { x: 6, y: 10 };
         break;
       case 1:
+        // play objective rached audio
         objective = { x: 6, y: 1 };
         break;
       case 2:
+        // play objective rached audio
         objective = { x: 1, y: 1 };
         break;
       default:
@@ -327,6 +330,7 @@ function checkObjectiveLine(y, x) {
     objective.y == playerPosition.y &&
     levelevent == 3
   ) {
+    // play objective rached audio
     mazeElement.innerHTML = "";
     generateLevel();
     audio.vo4e.play();
@@ -424,6 +428,7 @@ function keyPress(key) {
       playerTrigger();
       break;
     case " ":
+      // create functionality similar to this that activates once player will meet a wall compare playerPosition and neW to do that
       nUp = map[playerPosition.y - 1][playerPosition.x];
       nRight = map[playerPosition.y][playerPosition.x + 1];
       nDown = map[playerPosition.y + 1][playerPosition.x];
@@ -431,15 +436,23 @@ function keyPress(key) {
       startCooldown(4000);
       if (nUp == "w") {
         setTimeout(audio.scanu.play, 0);
+      } else {
+        // play no wall scan
       }
       if (nRight == "w") {
         setTimeout(audio.scanr.play, 1000);
+      } else {
+        // play no wall scan
       }
       if (nDown == "w") {
         setTimeout(audio.scand.play, 2000);
+      } else {
+        // play no wall scan
       }
       if (nLeft == "w") {
         setTimeout(audio.scanl.play, 3000);
+      } else {
+        // play no wall scan
       }
       break;
     case "Enter":
@@ -481,6 +494,12 @@ function playerTrigger() {
   } else {
   }
 }
+function onSiteLoad() {
+  // vo "press enter to play"
+}
+function creditsBGM() {
+  // play bgm once you enter creditshtml and add a statement that doesn play if its all
+}
 function startup() {
   level = 1;
   show("gamescreen", "startscreen");
@@ -495,6 +514,7 @@ function stageEnd() {
   level++;
   levelevent == 0;
   generateLevel();
+  // add transition sound
   switch (level) {
     case 2:
       logDialogue("System:");
