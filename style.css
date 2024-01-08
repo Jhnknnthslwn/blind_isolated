@@ -15,7 +15,7 @@
 }
 #startscreen {
   /*background: url(img-res/terminal.gif);*/
-  background: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTdneGthOTRjb2g5OTFvazFtaHk1bnYyaG9wdWQ3dms5OTI5eHI1diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KH5Qoqmvt6lindzF1R/giphy.gif");
+  background-image: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTdneGthOTRjb2g5OTFvazFtaHk1bnYyaG9wdWQ3dms5OTI5eHI1diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KH5Qoqmvt6lindzF1R/giphy.gif");
   background-size: cover;
   display: grid;
   grid-template-rows: repeat(4, 1fr);
@@ -263,7 +263,8 @@ stretch,
 }
 /* The Game UI */
 #gamescreen {
-  background: url(img-res/Terminal.gif);
+  /*background: url(img-res/Terminal.gif);*/
+  background-image: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTdneGthOTRjb2g5OTFvazFtaHk1bnYyaG9wdWQ3dms5OTI5eHI1diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KH5Qoqmvt6lindzF1R/giphy.gif");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
