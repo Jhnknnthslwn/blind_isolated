@@ -652,10 +652,10 @@ function preloadAudio() {
   this.vo4e = new audioTrack("sounds/level4-of-vo.mp3", 0.5);
   this.vo5 = new audioTrack("sounds/end-vo.mp3", 0.5);
 
-  this.credsBGM = new audioTrack("sounds/credits-bgm.mp3", 0.5);
-  this.meetWall = new audioTrack("sounds/move-meet-wall.mp3", );
-  this.objReach = new audioTrack("sounds/obj-reached.mp3", 0.5);
-  this.stgChange = new audioTrack("sounds/stage-change.mp3", 0.4);
-  this.stgTrans = new audioTrack("sounds/stage-trans.mp3", 0.5);
-  this.scannull = new audioTrack("sounds/scan-null.mp3", 0.5);
+  this.credsBGM = new audioTrack("sounds/credits-bgm.mp3", 0.7);
+  this.meetWall = new audioTrack("sounds/move-meet-wall.mp3");
+  this.objReach = new audioTrack("sounds/obj-reached.mp3", 0.7);
+  this.stgChange = new audioTrack("sounds/stage-change.mp3", 0.5);
+  this.stgTrans = new audioTrack("sounds/stage-trans.mp3", 0.7);
+  this.scannull = new audioTrack("sounds/scan-null.mp3", 0.7);
 }
