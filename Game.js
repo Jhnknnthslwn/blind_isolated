@@ -484,7 +484,11 @@ function playerTrigger() {
   if (map[newY][newX] != "w") {
     startCooldown(2500);
     movePlayerTo(newY, newX);
-    updateCoordinates(newY, newX);
+    setTimeout(() => {
+      updateCoordinates(newY, newX);
+      logDialogue("System:");
+      logDialogue("Awaiting Input");
+    }, 2500);
     checkGoalProximity(newY, newX);
     tileTrigger(newY, newX);
     levelEventTrigger(level, levelevent, playerPosition.y, playerPosition.x);
