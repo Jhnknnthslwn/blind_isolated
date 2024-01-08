@@ -503,7 +503,7 @@ function playerTrigger() {
 function onSiteLoad() {
   setTimeout(() => {
     audio.voM.play();
-  });
+  }, 2000);
 }
 function creditsBGM() {
   if(audio.credsBGM.isPlaying){
