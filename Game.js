@@ -580,9 +580,9 @@ function audioTrack(url, volume) {
 }
 // audio location stuffs
 function preloadAudio() {
-  this.prox1 = new audioTrack("sounds/proximity-1.mp3");
-  this.prox2 = new audioTrack("sounds/proximity-2.mp3");
-  this.prox3 = new audioTrack("sounds/proximity-3.mp3");
+  this.prox1 = new audioTrack("sounds/proximity-1.mp3", 0.5);
+  this.prox2 = new audioTrack("sounds/proximity-2.mp3", 0.5);
+  this.prox3 = new audioTrack("sounds/proximity-3.mp3", 0.5);
 
   this.rockTu = new audioTrack("sounds/rockt-forward.mp3");
   this.rockTr = new audioTrack("sounds/rockt-right.mp3");
@@ -591,7 +591,7 @@ function preloadAudio() {
 
   this.roverc = new audioTrack("sounds/rover-concrete.mp3", 0.7);
   this.roverf = new audioTrack("sounds/rover-forest.mp3", 0.7);
-  this.roverr = new audioTrack("sounds/rover-rock.mp3", 0.7);
+  this.roverr = new audioTrack("sounds/rover-rock.mp3", 0.5);
   this.rovers = new audioTrack("sounds/rover-sand.mp3", 0.7);
 
   this.scanu = new audioTrack("sounds/scan-forward.mp3");
