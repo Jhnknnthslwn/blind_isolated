@@ -499,9 +499,22 @@ function playerTrigger() {
     logDialogue("Impassable terrain detected");
   }
 }
+window.onload = function() {
+    setTimeout(() => {
+    audio.voM.play();
+  }, 2000);
+}
 /*
 function onSiteLoad() {
   setTimeout(() => {
+    audio.voM.play();
+  }, 2000);
+}
+// funct 1
+window.onload = onSiteLoad();
+// funct 2
+window.onload = function() {
+    setTimeout(() => {
     audio.voM.play();
   }, 2000);
 }
