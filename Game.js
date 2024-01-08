@@ -211,7 +211,7 @@ function updateCoordinates(y, x) {
   y = y - y - y; //it flips the integer
   let newCoord = document.createElement("div");
   newCoord.classList.add("clog");
-  newCoord.textContent = x + ", " + y;
+  newCoord.textContent ="Arrived at: " + x + ", " + y;
   coordContainer.appendChild(newCoord);
 }
 function logDialogue(something) {
@@ -484,6 +484,7 @@ function playerTrigger() {
   if (map[newY][newX] != "w") {
     startCooldown(2500);
     movePlayerTo(newY, newX);
+    logDialogue("Moving......");
     setTimeout(() => {
       updateCoordinates(newY, newX);
       logDialogue("System:");
