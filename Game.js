@@ -584,10 +584,10 @@ function preloadAudio() {
   this.prox2 = new audioTrack("sounds/proximity-2.mp3", 0.5);
   this.prox3 = new audioTrack("sounds/proximity-3.mp3", 0.5);
 
-  this.rockTu = new audioTrack("sounds/rockt-forward.mp3");
-  this.rockTr = new audioTrack("sounds/rockt-right.mp3");
-  this.rockTd = new audioTrack("sounds/rockt-behind.mp3");
-  this.rockTl = new audioTrack("sounds/rockt-left.mp3");
+  this.rockTu = new audioTrack("sounds/rockt-forward.mp3", 0.9);
+  this.rockTr = new audioTrack("sounds/rockt-right.mp3", 0.9);
+  this.rockTd = new audioTrack("sounds/rockt-behind.mp3", 0.9);
+  this.rockTl = new audioTrack("sounds/rockt-left.mp3", 0.9);
 
   this.roverc = new audioTrack("sounds/rover-concrete.mp3", 0.7);
   this.roverf = new audioTrack("sounds/rover-forest.mp3", 0.7);
