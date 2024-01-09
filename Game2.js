@@ -507,9 +507,7 @@ function playerTrigger() {
   }
 }
 window.onload = function() {
-    setTimeout(() => {
     audio.voM.play();
-  }, 2000);
 }
 /*
 function onSiteLoad() {
