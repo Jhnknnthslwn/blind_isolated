@@ -314,10 +314,12 @@ function checkObjectiveLine(y, x) {
     switch (levelevent) {
       case 0:
         // play objective rached audio
+        audio.obj2c.play();
         objective = { x: 6, y: 10 };
         break;
       case 1:
         // play objective rached audio
+        audio.obj3c.play();
         objective = { x: 6, y: 1 };
         break;
       case 2:
@@ -349,6 +351,7 @@ function levelEventTrigger(stage, eventnum, y, x) {
     movePlayerTo(6, 1);
     updateCoordinates(y, x);
   } else if (stage == 4 && eventnum <= 4) {
+    //audio.obj1c.play(); dont know where to put
     checkObjectiveLine(y, x);
   }
 }
@@ -664,4 +667,8 @@ function preloadAudio() {
   this.stgChange = new audioTrack("sounds/stage-change.mp3", 0.5);
   this.stgTrans = new audioTrack("sounds/stage-trans.mp3", 0.7);
   this.scannull = new audioTrack("sounds/scan-null.mp3", 0.7);
+
+  this.obj1c = new audioTrack("sounds/obj1comp.mp3");
+  this.obj2c = new audioTrack("sounds/obj2comp.mp3");
+  this.obj3c = new audioTrack("sounds/obj3comp.mp3");
 }
