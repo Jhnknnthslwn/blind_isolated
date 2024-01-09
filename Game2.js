@@ -314,16 +314,17 @@ function checkObjectiveLine(y, x) {
     switch (levelevent) {
       case 0:
         // play objective rached audio
-        audio.obj2c.play();
+        audio.obj1c.play();
         objective = { x: 6, y: 10 };
         break;
       case 1:
         // play objective rached audio
-        audio.obj3c.play();
+        audio.obj2c.play();
         objective = { x: 6, y: 1 };
         break;
       case 2:
         // play objective rached audio
+        audio.obj3c.play();
         objective = { x: 1, y: 1 };
         break;
       default:
@@ -351,7 +352,7 @@ function levelEventTrigger(stage, eventnum, y, x) {
     movePlayerTo(6, 1);
     updateCoordinates(y, x);
   } else if (stage == 4 && eventnum <= 4) {
-    //audio.obj1c.play(); dont know where to put
+    // dont know where to put
     checkObjectiveLine(y, x);
   }
 }
