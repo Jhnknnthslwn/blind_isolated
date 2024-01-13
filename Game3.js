@@ -19,11 +19,29 @@ let nUp = '';
 let nRight = '';
 let nDown = '';
 let nLeft = '';
+let isWallVisible = false; //used to enable accessibility features
+let playerDirection = 'z';
 
 
 //map swap / map change / level change function
 function mapChange() {
     switch (level) {
+        case 0:
+            map = [ // move the wall down once they hit it
+                ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
+                ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
+                ["w", "w", "w", "w", "w", "w", "w", "w", "g", "w", "w", "w"],
+                ["w", "w", "w", "w", "w", "w", "w", "w", "c", "w", "w", "w"],
+                ["w", "w", "w", "w", "w", "w", "w", "w", "c", "c", "w", "w"],
+                ["w", "w", "w", "w", "c", "c", "c", "c", "w", "c", "w", "w"],
+                ["w", "w", "w", "w", "c", "w", "w", "c", "c", "c", "w", "w"],
+                ["w", "w", "w", "w", "c", "c", "w", "w", "w", "w", "w", "w"],
+                ["w", "w", "w", "w", "w", "c", "w", "w", "w", "w", "w", "w"],
+                ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
+                ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
+                ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"]
+            ];
+            break;
         case 1:
             map = [
                 ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
@@ -166,7 +184,37 @@ function generateLevel() {
             let cellElement = document.createElement("div");
             cellElement.classList.add("cell");
             if (cell == "w") {
-                cellElement.classList.add("wall");
+                if (isWallVisible) {
+                    cellElement.classList.add("wall");
+                }
+            } else if (rowIndex == playerPosition.y && colIndex == playerPosition.x) {
+                cellElement.classList.add("player");
+                cellElement.setAttribute("id", "character");
+            } else if (rowIndex == goalPosition.y && colIndex == goalPosition.x) {
+                cellElement.classList.add("goal");
+            }
+            mazeElement.appendChild(cellElement);
+        });
+    });
+}
+
+
+//toggles wall visibility
+function wallToggle() {
+    mazeElement.innerHTML = "";
+    if (isWallVisible == true) {
+        isWallVisible = false;
+    } else {
+        isWallVisible = true;
+    }
+    map.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+            let cellElement = document.createElement("div");
+            cellElement.classList.add("cell");
+            if (cell == "w") {
+                if (isWallVisible) {
+                    cellElement.classList.add("wall");
+                }
             } else if (rowIndex == playerPosition.y && colIndex == playerPosition.x) {
                 cellElement.classList.add("player");
                 cellElement.setAttribute("id", "character");
@@ -304,7 +352,7 @@ function checkGoalProximity(y, x) {
 }
 
 
-//local man goes insane in logic calculation and if else nesting
+//event triggers for each stage
 function levelEventTrigger(stage, y, x) {
     if (stage == 3) {
         if (levelevent == 0) {
@@ -329,38 +377,6 @@ function levelEventTrigger(stage, y, x) {
                     audio.rockTl.play();
                 } else {
                     audio.rockTr.play();
-                }
-            } else if (objective.x-1 == playerPosition.x && objective.y != playerPosition.y) { //checks if player is 1 tile left of the obj los
-                if (objective.y < playerPosition.y) {
-                    //woosh front from right
-                    alert('woosh front from right');
-                } else {
-                    //woosh front from left
-                    alert('woosh front from left');
-                }
-            } else if (objective.x+1 == playerPosition.x && objective.y != playerPosition.y) { //checks if player is 1 tile right of the obj los
-                if (objective.y < playerPosition.y) {
-                    //woosh back from right
-                    alert('woosh back from right');
-                } else {
-                    //woosh back from left
-                    alert('woosh back from left');
-                }
-            } else if (objective.y-1 == playerPosition.y && objective.x != playerPosition.x) { //checks if player is 1 tile above of the obj los
-                if (objective.x < playerPosition.x) {
-                    //woosh left from back
-                    alert('woosh left from back');
-                } else {
-                    //woosh right from back
-                    alert('woosh right from back');
-                }
-            } else if (objective.y+1 == playerPosition.y && objective.x != playerPosition.x) { //checks if player is 1 tile below of the obj los
-                if (objective.x < playerPosition.x) {
-                    //woosh left
-                    alert('woosh left from front');
-                } else {
-                    //woosh right
-                    alert('woosh right from front');
                 }
             } else if (objective.x == playerPosition.x && objective.y == playerPosition.y) {
                 if (levelevent == 3) {
@@ -416,7 +432,7 @@ document.addEventListener("keyup", function (event) {
 //compressed all triggers in one place
 function playerTrigger() {
     if (map[newY][newX] != "w") {
-        startCooldown(2500);
+        //startCooldown(2500);
         movePlayerTo(newY, newX);
         checkGoalProximity(newY, newX);
         tileTrigger(newY, newX);
@@ -426,6 +442,22 @@ function playerTrigger() {
             updateCoordinates(newY, newX);
             logDialogue("System:");
             logDialogue("Awaiting Input");
+            if (isWallVisible) {
+                switch (playerDirection) {
+                    case 'n':
+                        audio.voN.play();
+                        break;
+                    case 'e':
+                        audio.voE.play();
+                        break;
+                    case 's':
+                        audio.voS.play();
+                        break;
+                    case 'w':
+                        audio.voW.play();
+                        break;
+                }
+            }
         }, 2500);
     } else {
         audio.meetWall.play();
@@ -442,41 +474,73 @@ function keyPress(key) {
         case "w":
             rotation = 0;
             newY = newY - 1;
+            playerDirection = 'n';
             playerTrigger();
             break;
         case "s":
             rotation = 180;
             newY = newY + 1;
+            playerDirection = 's';
             playerTrigger();
             break;
         case "a":
             rotation = -90;
             newX = newX - 1;
+            playerDirection = 'w';
             playerTrigger();
             break;
         case "d":
             rotation = 90;
             newX = newX + 1;
+            playerDirection = 'e';
+            playerTrigger();
+            break;
+        case "W":
+            rotation = 0;
+            newY = newY - 1;
+            playerDirection = 'n';
+            playerTrigger();
+            break;
+        case "S":
+            rotation = 180;
+            newY = newY + 1;
+            playerDirection = 's';
+            playerTrigger();
+            break;
+        case "A":
+            rotation = -90;
+            newX = newX - 1;
+            playerDirection = 'w';
+            playerTrigger();
+            break;
+        case "D":
+            rotation = 90;
+            newX = newX + 1;
+            playerDirection = 'e';
             playerTrigger();
             break;
         case "ArrowUp":
             rotation = 0;
             newY = newY - 1;
+            playerDirection = 'n';
             playerTrigger();
             break;
         case "ArrowDown":
             rotation = 180;
             newY = newY + 1;
+            playerDirection = 's';
             playerTrigger();
             break;
         case "ArrowLeft":
             rotation = -90;
             newX = newX - 1;
+            playerDirection = 'w';
             playerTrigger();
             break;
         case "ArrowRight":
             rotation = 90;
             newX = newX + 1;
+            playerDirection = 'e';
             playerTrigger();
             break;
         case " ": // create functionality similar to this that activates once player will meet a wall compare playerPosition and neW to do that
@@ -618,6 +682,11 @@ function preloadAudio() {
     this.scanr = new audioTrack("sounds/scan-right.mp3");
     this.scand = new audioTrack("sounds/scan-behind.mp3");
     this.scanl = new audioTrack("sounds/scan-left.mp3");
+
+    this.voN = new audioTrack("sounds/movenorth.mp3");
+    this.voE = new audioTrack("sounds/moveeast.mp3");
+    this.voS = new audioTrack("sounds/movesouth.mp3");
+    this.voW = new audioTrack("sounds/movewest.mp3");
   
     this.voM = new audioTrack("sounds/menu-vo.mp3", 0.5);
     this.vo1 = new audioTrack("sounds/start-vo.mp3", 0.5);
