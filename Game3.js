@@ -199,34 +199,6 @@ function generateLevel() {
 }
 
 
-//toggles wall visibility
-function wallToggle() {
-    mazeElement.innerHTML = "";
-    if (isWallVisible == true) {
-        isWallVisible = false;
-    } else {
-        isWallVisible = true;
-    }
-    map.forEach((row, rowIndex) => {
-        row.forEach((cell, colIndex) => {
-            let cellElement = document.createElement("div");
-            cellElement.classList.add("cell");
-            if (cell == "w") {
-                if (isWallVisible) {
-                    cellElement.classList.add("wall");
-                }
-            } else if (rowIndex == playerPosition.y && colIndex == playerPosition.x) {
-                cellElement.classList.add("player");
-                cellElement.setAttribute("id", "character");
-            } else if (rowIndex == goalPosition.y && colIndex == goalPosition.x) {
-                cellElement.classList.add("goal");
-            }
-            mazeElement.appendChild(cellElement);
-        });
-    });
-}
-
-
 //create log entry functions
 function updateCoordinates(y, x) {
     y = y - y - y; //it flips the integer
@@ -263,6 +235,20 @@ function movePlayerTo(y, x) {
 }
 
 
+//direction vo terminator
+function stopDvo() {
+    if (audio.voN.isPlaying) {
+        audio.voN.stop();
+    } else if (audio.voE.isPlaying) {
+        audio.voE.stop();
+    } else if (audio.voS.isPlaying) {
+        audio.voS.stop();
+    } else if (audio.voW.isPlaying) {
+        audio.voW.stop();
+    }
+}
+
+
 // tile checker
 function tileTrigger(y, x) {
     switch (map[y][x]) {
@@ -287,10 +273,11 @@ function tileTrigger(y, x) {
             } else {
                 audio.stgTrans.play();
                 setTimeout(() => {
+                    stopDvo();
                     mazeElement.innerHTML = "";
                     coordContainer.innerHTML = "";
                     stageEnd();
-                }, 2000);
+                }, 2510);
             }
             break;
         default:
@@ -432,13 +419,31 @@ document.addEventListener("keyup", function (event) {
 //compressed all triggers in one place
 function playerTrigger() {
     if (map[newY][newX] != "w") {
-        //startCooldown(2500);
+        if (isWallVisible) {
+            startCooldown(3000);
+        } else {
+            //startCooldown(2250);
+        }
         movePlayerTo(newY, newX);
         checkGoalProximity(newY, newX);
         tileTrigger(newY, newX);
         levelEventTrigger(level, playerPosition.y, playerPosition.x);
         logDialogue("Moving......");
         setTimeout(() => {
+            switch (playerDirection) {
+                case 'n':
+                    logDialogue("Moved North");
+                    break;
+                case 'e':
+                    logDialogue("Moved East");
+                    break;
+                case 's':
+                    logDialogue("Moved South");
+                    break;
+                case 'w':
+                    logDialogue("Moved West");
+                    break;
+            }
             updateCoordinates(newY, newX);
             logDialogue("System:");
             logDialogue("Awaiting Input");
@@ -458,7 +463,7 @@ function playerTrigger() {
                         break;
                 }
             }
-        }, 2500);
+        }, 2250);
     } else {
         audio.meetWall.play();
         logDialogue("Impassable terrain detected");
@@ -471,6 +476,9 @@ function keyPress(key) {
     newX = playerPosition.x;
     newY = playerPosition.y;
     switch (key) {
+        case "l":
+            wallToggle();
+            break;
         case "w":
             rotation = 0;
             newY = newY - 1;
@@ -598,6 +606,34 @@ function startup() {
     logDialogue("System:");
     logDialogue("Use WASD or Arrow Keys to move");
     audio.vo1.play();
+}
+
+
+//toggles wall visibility
+function wallToggle() {
+    mazeElement.innerHTML = "";
+    if (isWallVisible == true) {
+        isWallVisible = false;
+    } else {
+        isWallVisible = true;
+    }
+    map.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+            let cellElement = document.createElement("div");
+            cellElement.classList.add("cell");
+            if (cell == "w") {
+                if (isWallVisible) {
+                    cellElement.classList.add("wall");
+                }
+            } else if (rowIndex == playerPosition.y && colIndex == playerPosition.x) {
+                cellElement.classList.add("player");
+                cellElement.setAttribute("id", "character");
+            } else if (rowIndex == goalPosition.y && colIndex == goalPosition.x) {
+                cellElement.classList.add("goal");
+            }
+            mazeElement.appendChild(cellElement);
+        });
+    });
 }
 
 
