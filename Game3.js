@@ -504,7 +504,7 @@ function playerTrigger() {
             }
         }, 2250);
     } else {
-        if (level = 0) {
+        if (level == 0) {
             if (levelevent == 4) {
                 alert("heet a wall");
                 level++;
