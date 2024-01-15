@@ -21,6 +21,7 @@ let nDown = '';
 let nLeft = '';
 let isWallVisible = false; //used to enable accessibility features
 let playerDirection = 'z';
+let wallHitT = 0;
 
 
 //map swap / map change / level change function
@@ -33,10 +34,10 @@ function mapChange() {
                 ["w", "w", "w", "w", "w", "w", "w", "w", "g", "w", "w", "w"],
                 ["w", "w", "w", "w", "w", "w", "w", "w", "c", "w", "w", "w"],
                 ["w", "w", "w", "w", "w", "w", "w", "w", "c", "c", "w", "w"],
-                ["w", "w", "w", "w", "c", "c", "c", "c", "w", "c", "w", "w"],
-                ["w", "w", "w", "w", "c", "w", "w", "c", "c", "c", "w", "w"],
+                ["w", "w", "w", "w", "w", "c", "c", "c", "w", "c", "w", "w"],
+                ["w", "w", "w", "w", "c", "c", "w", "c", "c", "c", "w", "w"],
                 ["w", "w", "w", "w", "c", "c", "w", "w", "w", "w", "w", "w"],
-                ["w", "w", "w", "w", "w", "c", "w", "w", "w", "w", "w", "w"],
+                ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
                 ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
                 ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
                 ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"]
@@ -146,39 +147,8 @@ function mapChange() {
 }
 
 
-// generates the level and sets player and goal position
-function generateLevel() {
-    mapChange();
-    switch (level) {
-      case 1:
-        playerPosition = {x: 1, y: 10};
-        goalPosition = {x: 10, y: 1};
-        break;
-      case 2:
-        playerPosition = {x: 7, y: 10};
-        goalPosition = {x: 2, y: 1};
-        break;
-      case 3:
-        playerPosition = {x: 5, y: 10};
-        goalPosition = {x: 2, y: 2};
-        break;
-      case 4:
-        if (levelevent == 3) {
-            goalPosition = {x: 10, y: 1};
-        } else {
-            playerPosition = {x: 1, y: 10};
-            goalPosition = {x: 20, y: 20};
-        }
-        break;
-      case 5:
-        playerPosition = {x: 10, y: 10};
-        goalPosition = {x: 6, y: 2};
-        break;
-      default:
-        playerPosition = {x: 0, y: 0};
-        goalPosition = {x: 0, y: 0};
-        break;
-    }
+// generate map
+function generateMap() {
     map.forEach((row, rowIndex) => {
         row.forEach((cell, colIndex) => {
             let cellElement = document.createElement("div");
@@ -196,6 +166,47 @@ function generateLevel() {
             mazeElement.appendChild(cellElement);
         });
     });
+}
+
+
+// generates the level and sets player and goal position
+function generateLevel() {
+    mapChange();
+    switch (level) {
+        case 0:
+            playerPosition = {x: 5, y: 8};
+            goalPosition = {x: 8, y: 2};
+            break;
+        case 1:
+            playerPosition = {x: 1, y: 10};
+            goalPosition = {x: 10, y: 1};
+            break;
+        case 2:
+            playerPosition = {x: 7, y: 10};
+            goalPosition = {x: 2, y: 1};
+            break;
+        case 3:
+            playerPosition = {x: 5, y: 10};
+            goalPosition = {x: 2, y: 2};
+            break;
+        case 4:
+            if (levelevent == 3) {
+                goalPosition = {x: 10, y: 1};
+            } else {
+                playerPosition = {x: 1, y: 10};
+                goalPosition = {x: 20, y: 20};
+            }
+            break;
+        case 5:
+            playerPosition = {x: 10, y: 10};
+            goalPosition = {x: 6, y: 2};
+            break;
+        default:
+            playerPosition = {x: 0, y: 0};
+            goalPosition = {x: 0, y: 0};
+            break;
+    }
+    generateMap();
 }
 
 
@@ -290,7 +301,11 @@ function tileTrigger(y, x) {
 //ending codes
 function stageEnd() {
     //insert stage end events here
-    level++;
+    if (level == 0) {
+        level = 2;
+    } else {
+        level++;
+    }
     levelevent == 0;
     generateLevel();
     // add transition sound
@@ -341,11 +356,38 @@ function checkGoalProximity(y, x) {
 
 //event triggers for each stage
 function levelEventTrigger(stage, y, x) {
-    if (stage == 3) {
+    if (stage == 0) {
+        if (levelevent == 0) {
+            if (y == 7 && x == 5) {
+                alert('move left');
+                levelevent++;
+            }
+        } else if (levelevent == 1) {
+            if (y == 7 && x == 4) {
+                alert('move up');
+                levelevent++;
+            }
+        } else if (levelevent == 2) {
+            if (y == 6 && x == 4) {
+                alert('move right');
+                levelevent++;
+            }
+        } else if (levelevent == 3) {
+            if (y == 6 && x == 5) {
+                alert('move down');
+                map[7][5] = "w";
+                mazeElement.innerHTML = "";
+                generateMap();
+                levelevent++;
+            }
+        }
+    } else if (stage == 3) {
         if (levelevent == 0) {
             if (y == 3 && x == 1) {
                 audio.stgChange.play();
                 map[4][1] = "w";
+                mazeElement.innerHTML = "";
+                generateMap();
                 movePlayerTo(6, 1);
                 updateCoordinates(y, x);
                 levelevent++;
@@ -374,17 +416,14 @@ function levelEventTrigger(stage, y, x) {
                 } else {
                     switch (levelevent) {
                     case 0:
-                        // play objective rached audio
                         audio.obj1c.play();
                         objective = { x: 6, y: 10 };
                         break;
                     case 1:
-                        // play objective rached audio
                         audio.obj2c.play();
                         objective = { x: 6, y: 1 };
                         break;
                     case 2:
-                        // play objective rached audio
                         audio.obj3c.play();
                         objective = { x: 1, y: 1 };
                         break;
@@ -465,6 +504,12 @@ function playerTrigger() {
             }
         }, 2250);
     } else {
+        if (level = 0) {
+            if (levelevent == 4) {
+                alert("heet a wall");
+                level++;
+            }
+        }
         audio.meetWall.play();
         logDialogue("Impassable terrain detected");
     }
@@ -609,6 +654,26 @@ function startup() {
 }
 
 
+//tutorial startup
+function startupT() {
+    if(audio.voM.isPlaying) {
+        audio.voM.stop();
+    }
+    level = 0;
+    isCooldownActive = true;
+    show("gamescreen", "startscreen");
+    generateLevel();
+    logDialogue("System:");
+    logDialogue("Use WASD or Arrow Keys to move");
+    setTimeout(() => {
+        isCooldownActive = false;
+        movePlayerTo(7, 5);
+        levelEventTrigger(level, playerPosition.y, playerPosition.x);
+    }, 1000);
+    
+}
+
+
 //toggles wall visibility
 function wallToggle() {
     mazeElement.innerHTML = "";
@@ -617,23 +682,7 @@ function wallToggle() {
     } else {
         isWallVisible = true;
     }
-    map.forEach((row, rowIndex) => {
-        row.forEach((cell, colIndex) => {
-            let cellElement = document.createElement("div");
-            cellElement.classList.add("cell");
-            if (cell == "w") {
-                if (isWallVisible) {
-                    cellElement.classList.add("wall");
-                }
-            } else if (rowIndex == playerPosition.y && colIndex == playerPosition.x) {
-                cellElement.classList.add("player");
-                cellElement.setAttribute("id", "character");
-            } else if (rowIndex == goalPosition.y && colIndex == goalPosition.x) {
-                cellElement.classList.add("goal");
-            }
-            mazeElement.appendChild(cellElement);
-        });
-    });
+    generateMap();
 }
 
 
