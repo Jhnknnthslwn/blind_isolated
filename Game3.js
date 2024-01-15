@@ -144,6 +144,9 @@ function mapChange() {
             map = [];
             break;
     }
+    if (level <= 5) {
+    document.getElementById("stagelvl").textContent = `Stage Level ${level}`;
+  }
 }
 
 
@@ -628,6 +631,11 @@ function keyPress(key) {
                 startup();
             }
             break;
+        case "Escape":
+            if (window.getComputedStyle(checkGameDiv).display == "block") {
+                window.location.href = "index2.html";
+            }
+      break;
         default:
             break;
     }
