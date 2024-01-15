@@ -461,7 +461,7 @@ function playerTrigger() {
         if (isWallVisible) {
             startCooldown(3000);
         } else {
-            //startCooldown(2250);
+            startCooldown(2250);
         }
         movePlayerTo(newY, newX);
         checkGoalProximity(newY, newX);
