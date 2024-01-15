@@ -169,6 +169,7 @@ function generateMap() {
             mazeElement.appendChild(cellElement);
         });
     });
+    character.style.transform = "rotate(" + rotation + "deg)";
 }
 
 
