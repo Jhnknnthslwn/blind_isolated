@@ -329,6 +329,9 @@ stretch,
 .wall {
   background-color: rgba(149, 169, 133, 0.153);
 }
+.obj {
+  background-color: rgba(176, 230, 50, 0.153);
+}
 .player {
   background-image: url(img-res/player.png);
   background-size: 12vh;
