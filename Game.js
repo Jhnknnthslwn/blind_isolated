@@ -162,12 +162,18 @@ function generateMap() {
             } else if (rowIndex == playerPosition.y && colIndex == playerPosition.x) {
                 cellElement.classList.add("player");
                 cellElement.setAttribute("id", "character");
+                cellElement.style.transform = "rotate(" + rotation + "deg)";
             } else if (rowIndex == goalPosition.y && colIndex == goalPosition.x) {
                 cellElement.classList.add("goal");
+            } else if (level == 4 && levelevent < 3 && rowIndex == objective.y && colIndex == objective.x) {
+                if (isWallVisible) {
+                    cellElement.classList.add("obj");
+                }
             }
             mazeElement.appendChild(cellElement);
         });
     });
+    //character.style.transform = "rotate(" + rotation + "deg)";
 }
 
 
@@ -514,21 +520,20 @@ function playerTrigger() {
             updateCoordinates(newY, newX);
             logDialogue("System:");
             logDialogue("Awaiting Input");
-            if (isWallVisible) {
-                switch (playerDirection) {
-                    case 'n':
-                        audio.voN.play();
-                        break;
-                    case 'e':
-                        audio.voE.play();
-                        break;
-                    case 's':
-                        audio.voS.play();
-                        break;
-                    case 'w':
-                        audio.voW.play();
-                        break;
-                }
+            // removed iswallvisible if statement
+            switch (playerDirection) {
+                case 'n':
+                    audio.voN.play();
+                    break;
+                case 'e':
+                    audio.voE.play();
+                    break;
+                case 's':
+                    audio.voS.play();
+                    break;
+                case 'w':
+                    audio.voW.play();
+                    break;
             }
         }, 2250);
     } else {
@@ -672,7 +677,7 @@ function keyPress(key) {
             break;
         case "Enter":
             if (window.getComputedStyle(checkGameDiv).display == "none") {
-                startup();
+                startupT();
             }
             break;
         default:
