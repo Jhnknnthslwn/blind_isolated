@@ -146,6 +146,9 @@ function mapChange() {
             map = [];
             break;
     }
+    if (level <= 5) {
+    document.getElementById("stagelvl").textContent = `Stage Level ${level}`;
+  }
 }
 
 
@@ -168,6 +171,7 @@ function generateMap() {
             mazeElement.appendChild(cellElement);
         });
     });
+    character.style.transform = "rotate(" + rotation + "deg)";
 }
 
 
