@@ -2,6 +2,8 @@
 let mazeElement = document.getElementById("maze");
 let coordContainer = document.getElementById("coordinates");
 let checkGameDiv = document.getElementById("gamescreen");
+let wallSwitch = document.getElementById("wallToggle");
+let isWswitchvis = wallSwitch.getAttribute("hidden");
 
 
 //starting game values
@@ -513,6 +515,7 @@ function playerTrigger() {
         wallHitT++;
         if (wallHitT % 5 == 0) {
             //button appear
+            wallSwitch.removeAttribute("hidden");
         }
         audio.meetWall.play();
         logDialogue("Impassable terrain detected");
@@ -702,6 +705,7 @@ function wallTemp() {
         generateMap();
     }, 1000);
     // hide button
+    wallSwitch.setAttribute("hidden", "hidden");
 }
 
 
