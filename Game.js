@@ -146,9 +146,6 @@ function mapChange() {
             map = [];
             break;
     }
-    if (level <= 5) {
-    document.getElementById("stagelvl").textContent = `Stage Level ${level}`;
-  }
 }
 
 
@@ -171,7 +168,6 @@ function generateMap() {
             mazeElement.appendChild(cellElement);
         });
     });
-    character.style.transform = "rotate(" + rotation + "deg)";
 }
 
 
@@ -366,22 +362,47 @@ function levelEventTrigger(stage, y, x) {
     if (stage == 0) {
         if (levelevent == 0) {
             if (y == 7 && x == 5) {
-                alert('move left');
+                //now press a
+                audio.ttrlA.play();
                 levelevent++;
             }
         } else if (levelevent == 1) {
             if (y == 7 && x == 4) {
-                alert('move up');
+                //press w
+                if (audio.ttrlA.isPlaying) {
+                    audio.ttrlA.stop();
+                    setTimeout(() => {
+                        audio.ttrlW.play();
+                    }, 200);
+                } else {
+                    audio.ttrlW.play();
+                }
                 levelevent++;
             }
         } else if (levelevent == 2) {
             if (y == 6 && x == 4) {
-                alert('move right');
+                //press d
+                if (audio.ttrlW.isPlaying) {
+                    audio.ttrlW.stop();
+                    setTimeout(() => {
+                        audio.ttrlD.play();
+                    }, 200);
+                } else {
+                    audio.ttrlD.play();
+                }
                 levelevent++;
             }
         } else if (levelevent == 3) {
             if (y == 6 && x == 5) {
-                alert('move down');
+                //press s
+                if (audio.ttrlD.isPlaying) {
+                    audio.ttrlD.stop();
+                    setTimeout(() => {
+                        audio.ttrlS.play();
+                    }, 200);
+                } else {
+                    audio.ttrlS.play();
+                }
                 map[7][5] = "w";
                 mazeElement.innerHTML = "";
                 generateMap();
@@ -468,7 +489,7 @@ function playerTrigger() {
         if (isWallVisible) {
             startCooldown(3000);
         } else {
-            //startCooldown(2250);
+            startCooldown(2250);
         }
         movePlayerTo(newY, newX);
         checkGoalProximity(newY, newX);
@@ -513,7 +534,21 @@ function playerTrigger() {
     } else {
         if (level == 0) {
             if (levelevent == 4) {
-                alert("heet a wall");
+                //hit a wall
+                if (audio.ttrlS.isPlaying) {
+                    audio.ttrlS.stop();
+                    setTimeout(() => {
+                        audio.ttrlWa.play();
+                    }, 200);
+                    setTimeout(() => {
+                        audio.ttrlOv.play();
+                    }, 6300);
+                } else {
+                    audio.ttrlWa.play();
+                    setTimeout(() => {
+                        audio.ttrlOv.play();
+                    }, 6300);
+                }
                 level++;
             }
         }
@@ -675,13 +710,19 @@ function startupT() {
     isCooldownActive = true;
     show("gamescreen", "startscreen");
     generateLevel();
+    //damn debrief
+    audio.ttrlSt.play();
     logDialogue("System:");
     logDialogue("Use WASD or Arrow Keys to move");
+    //delay for 8.2 seconds then see the rover
     setTimeout(() => {
-        isCooldownActive = false;
         movePlayerTo(7, 5);
+        audio.ttrlSe.play();
+    }, 8200);
+    setTimeout(() => {
         levelEventTrigger(level, playerPosition.y, playerPosition.x);
-    }, 1000);
+        isCooldownActive = false;
+    }, 13000);
     
 }
 
@@ -819,4 +860,13 @@ function preloadAudio() {
     this.obj1c = new audioTrack("sounds/obj1comp.mp3");
     this.obj2c = new audioTrack("sounds/obj2comp.mp3");
     this.obj3c = new audioTrack("sounds/obj3comp.mp3");
+
+    this.ttrlSt = new audioTrack("sounds/ttrlStart.mp3");
+    this.ttrlSe = new audioTrack("sounds/ttrlSee.mp3");
+    this.ttrlW = new audioTrack("sounds/ttrlW.mp3");
+    this.ttrlA = new audioTrack("sounds/ttrlA.mp3");
+    this.ttrlS = new audioTrack("sounds/ttrlS.mp3");
+    this.ttrlD = new audioTrack("sounds/ttrlD.mp3");
+    this.ttrlWa = new audioTrack("sounds/ttrlWall.mp3");
+    this.ttrlOv = new audioTrack("sounds/ttrlOver.mp3");
 }
