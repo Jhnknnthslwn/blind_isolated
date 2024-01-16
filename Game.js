@@ -308,7 +308,8 @@ function stageEnd() {
     } else {
         level++;
     }
-    levelevent == 0;
+    levelevent = 0;
+    wallHitT = 0;
     generateLevel();
     // add transition sound
     switch (level) {
@@ -333,7 +334,7 @@ function stageEnd() {
             window.location.href='credits.html'
             break;
         default:
-            alert("Stage Loading Error");
+            //alert("Stage Loading Error");
         break;
     }
 }
