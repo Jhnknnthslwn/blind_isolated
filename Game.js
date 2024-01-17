@@ -426,6 +426,8 @@ function levelEventTrigger(stage, y, x) {
                 levelevent++;
                 }, 2000);
             }
+        } else {
+            
         }
     } else if (stage == 3) {
         if (levelevent == 0) {
