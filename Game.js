@@ -377,9 +377,10 @@ function levelEventTrigger(stage, y, x) {
                 audio.ttrlA.play();
                 levelevent++;
             }
-        } else if (levelevent == 1) {
-            if (y == 7 && x == 4) {
+        }
+        if (y == 7 && x == 4) {
                 //press w
+                setTimeout(() => {
                 if (audio.ttrlA.isPlaying) {
                     audio.ttrlA.stop();
                     setTimeout(() => {
@@ -389,10 +390,12 @@ function levelEventTrigger(stage, y, x) {
                     audio.ttrlW.play();
                 }
                 levelevent++;
+                }, 2000);
             }
         } else if (levelevent == 2) {
             if (y == 6 && x == 4) {
                 //press d
+                setTimeout(() => {
                 if (audio.ttrlW.isPlaying) {
                     audio.ttrlW.stop();
                     setTimeout(() => {
@@ -402,10 +405,12 @@ function levelEventTrigger(stage, y, x) {
                     audio.ttrlD.play();
                 }
                 levelevent++;
+                }, 3000);
             }
         } else if (levelevent == 3) {
             if (y == 6 && x == 5) {
                 //press s
+                setTimeout(() => {
                 if (audio.ttrlD.isPlaying) {
                     audio.ttrlD.stop();
                     setTimeout(() => {
@@ -418,6 +423,7 @@ function levelEventTrigger(stage, y, x) {
                 mazeElement.innerHTML = "";
                 generateMap();
                 levelevent++;
+                }, 2000);
             }
         }
     } else if (stage == 3) {
