@@ -146,6 +146,11 @@ function mapChange() {
             map = [];
             break;
     }
+    if (level == 0) {
+        document.getElementById("stagelvl").textContent = `Stage Level 1`;
+    } else if (level != 0 && level <= 5) {
+        document.getElementById("stagelvl").textContent = `Stage Level ${level}`;
+    }
 }
 
 
