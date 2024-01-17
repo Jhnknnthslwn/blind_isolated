@@ -378,7 +378,8 @@ function levelEventTrigger(stage, y, x) {
                 levelevent++;
             }
         }
-        if (y == 7 && x == 4) {
+        if (levelevent == 1) {
+            if (y == 7 && x == 4) {
                 //press w
                 setTimeout(() => {
                 if (audio.ttrlA.isPlaying) {
@@ -503,11 +504,7 @@ document.addEventListener("keyup", function (event) {
 //compressed all triggers in one place
 function playerTrigger() {
     if (map[newY][newX] != "w") {
-        if (isWallVisible) {
-            startCooldown(3000);
-        } else {
-            startCooldown(2250);
-        }
+        startCooldown(3000);
         movePlayerTo(newY, newX);
         checkGoalProximity(newY, newX);
         tileTrigger(newY, newX);
